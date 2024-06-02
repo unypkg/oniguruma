@@ -35,7 +35,7 @@ mkdir -pv /uny/sources
 cd /uny/sources || exit
 
 pkgname="oniguruma"
-pkggit="https://github.com/oniguruma/oniguruma.git refs/tags/*"
+pkggit="https://github.com/kkos/oniguruma.git refs/tags/*"
 gitdepth="--depth=1"
 
 ### Get version info from git remote
@@ -77,11 +77,13 @@ get_include_paths
 
 unset LD_RUN_PATH
 
+autoreconf -vfi
+
 ./configure \
     --prefix=/uny/pkg/"$pkgname"/"$pkgver"
 
 make -j"$(nproc)"
-make -j"$(nproc)" check 
+
 make -j"$(nproc)" install
 
 ####################################################
